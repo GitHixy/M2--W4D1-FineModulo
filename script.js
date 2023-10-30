@@ -1,7 +1,8 @@
 /*
 PARTE 1: 
 Oggi analizzeremo un problema molto comune: realizzare algoritmi di ricerca.
-Il tuo compito è creare una funzione che cercherà per posizione lavorativa E posizione geografica. Questi due valori verranno passati come parametri
+Il tuo compito è creare una funzione che cercherà per posizione lavorativa E posizione geografica. 
+Questi due valori verranno passati come parametri
 Ti abbiamo fornito un array chiamato "jobs" in fondo al file, NON modificarlo in alcun modo.
 L'algoritmo che devi realizzare cercherà SIA per posizione lavorativa che per posizione geografica.
 Prendi queste tre inserzioni ad esempio:
@@ -10,7 +11,8 @@ Prendi queste tre inserzioni ad esempio:
       job2:  location: "Genoa, IT"   title: "web dev"
       job3:  location: "US"      title: "dev"
 
-Cercando contemporaneamente come posizione lavorativa "dev" e posizione geografica "US", dovresti ottenere come risultato solamente job1 e job3,
+Cercando contemporaneamente come posizione lavorativa "dev" e posizione geografica "US", 
+dovresti ottenere come risultato solamente job1 e job3,
 in quanto job2 non soddisfa la condizione posta sulla posizione geografica.
 
 REQUISITI:
@@ -20,15 +22,19 @@ REQUISITI:
   count: 0 <-- inserisci qui il numero totale delle inserzioni trovate
 }
 
-- da ogni inserzione trovata, elimina i campi "description", "requirements", "benefits" e "company_profile" per semplificare il risultato
+- da ogni inserzione trovata, elimina i campi "description", "requirements", "benefits" e "company_profile" 
+per semplificare il risultato
 
-- la tua ricerca deve essere "case insensitive" (non deve essere influenzata da lettere maiuscole o minuscole nelle parole cercate). Questo e' possibile trasformando tutto in lettere minuscole con .toLowerCase()
+- la tua ricerca deve essere "case insensitive" (non deve essere influenzata da lettere maiuscole o minuscole 
+  nelle parole cercate). Questo e' possibile trasformando tutto in lettere minuscole con .toLowerCase()
 
 
 PARTE 2: 
-Nella pagina HTML, inserisci 2 input di tipo testo (uno per la location e uno per il titolo lavorativo, ricordati di diversificarli con un id) e un bottone con valore “cerca”
+Nella pagina HTML, inserisci 2 input di tipo testo (uno per la location e uno per il titolo lavorativo, 
+  ricordati di diversificarli con un id) e un bottone con valore “cerca”
 
-Al click del bottone, il codice deve raccogliere i valori dei due input e darli in pasto alla funzione che hai creato nella parte 1. 
+Al click del bottone, il codice deve raccogliere i valori dei due input e darli in pasto alla funzione che 
+hai creato nella parte 1. 
 
 Dopo aver raccolto ed elaborato i dati, e’ il momento di mostrare i risultati sulla pagina: 
     Puoi scegliere tu se utilizzare un semplice ul / li oppure una tabella 
@@ -38,6 +44,7 @@ Dopo aver raccolto ed elaborato i dati, e’ il momento di mostrare i risultati 
 */
 
 // NON MODIFICARE QUESTO ARRAY!
+
 const jobs = [
   { title: "Marketing Intern", location: "US, NY, New York" },
   {
@@ -125,3 +132,50 @@ const jobs = [
   },
 ]
 
+const jobFinder = function (title, location) {
+
+  const foundJobs = [] //Array dove inserire i lavori trovati
+  //let counter = 0  //setto counter = 0 - ogni volta che pushero' un lavoro trovato, fara' counter++. (uso let perche il valore cambia in base alla ricerca).
+
+//Ciclo dentro l'array jobs per iterare tutti i title e location, pushandoli in foundJobs nei casi in cui job.title AND job.location soddisfino i criteri di ricerca definiti dai parametri.
+//Uso toLowerCase per rendere la ricerca case insensitive.
+
+for (let i = 0; i < jobs.length; i++) { 
+  const job = jobs[i];
+  if (job.title.toLowerCase().includes(title.toLowerCase()) && job.location.toLowerCase().includes(location.toLowerCase())) { 
+  foundJobs.push(job);
+  //counter++;
+  }
+}
+//console.log(`Count: ${counter}`)
+return foundJobs;
+}
+
+//Provo la funzione:
+
+const jobToSearch = "dev";  //Inserisco parametro di ricerca per lavoro.
+const locationToSearch = "US"; //Inserisco parametro di ricerca zona geografica.
+const finalJob = jobFinder(jobToSearch, locationToSearch);  //a finalJob applico la funzione jobFinder.
+
+if (finalJob.length > 0) {
+  console.log("Lavori trovati:");
+  console.log(finalJob);
+  console.log(`Count: ${finalJob.length}`); //Soluzione semplice che sostituisce il counter.
+  } else {
+  console.log("Nessun lavoro trovato.");
+}
+
+//Impostato l'HTML andiamo a selezionare il nostro pulsante search.
+
+const searchButton = document.querySelector('#search-button');
+
+//Aggiungiamo un event listener al bottone che tenga conto dei due input.
+
+searchButton.addEventListener('click', function() {
+  const title = document.querySelector('#title-input').value; //Valore input title.
+  const location = document.querySelector('#location-input').value; //Valore input location.
+
+  const finalJob = jobFinder(title, location); //Applico la funzione.
+
+  console.log('Risultati della ricerca:', finalJob); //Risultato in Console.
+});
