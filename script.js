@@ -130,7 +130,7 @@ const jobs = [
 ]
 
 const jobFinder = function (title, location) {
-  //let counter = 0                                     //Metodo counter  
+
   const foundJobs = []                                  //Array dove inserire i lavori trovati                                                        //let counter = 0  //setto counter = 0 - ogni volta che pushero' un lavoro trovato, fara' counter++. (uso let perche il valore cambia in base alla ricerca).
   if (title.trim() === "" && location.trim() === "") {  //utilizzo trim per definire il fatto che l'input deve contenere qualcosa
     return foundJobs;                                   //se lascio input vuoti e premo search, mi ritornera' un array vuoto.
@@ -141,13 +141,12 @@ const jobFinder = function (title, location) {
   for (let i = 0; i < jobs.length; i++) { 
   const job = jobs[i];
   if (job.title.toLowerCase().includes(title.toLowerCase()) && job.location.toLowerCase().includes(location.toLowerCase())) { 
+
   foundJobs.push(job);
-  //counter++;
   }
 }
-//console.log(`Count: ${counter}`)
-return foundJobs;
-}
+return { result: foundJobs, count: foundJobs.length };
+};
 
 //Provo la funzione:
 
@@ -174,8 +173,9 @@ const searchIt = function() {
   const title = document.querySelector('#title-input').value;         //Valore input title.
   const location = document.querySelector('#location-input').value;   //Valore input location.
   const finalJob = jobFinder(title, location);                        //Applico la funzione.
-  if (finalJob.length > 0) {
-  console.log('Risultati della ricerca:', finalJob);                  //Risultato in Console.
+ if (finalJob.result.length > 0) {
+ console.log('Risultati della ricerca:', finalJob.result);  
+ console.log(`Counter:`, finalJob.count);                //Risultato in Console.
 } else {console.log("Nessun lavoro trovato."); }
 }
 
