@@ -20,6 +20,9 @@ label {
   font-weight: bold;
   margin-top: 10px;
 }
+input {
+  text-align: center;
+}
 #search-button {
   background-color: #3498db;
   color: #fff;
