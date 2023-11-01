@@ -163,9 +163,7 @@ return { result: foundJobs, count: foundJobs.length };
 //  console.log("Nessun lavoro trovato.");
 //}
 
-//Impostato l'HTML andiamo a selezionare il nostro pulsante search.
-
-const searchButton = document.querySelector('#search-button');
+const searchButton = document.querySelector('#search-button');  //Impostato l'HTML andiamo a selezionare il nostro pulsante search.
 
 //creo funzione selezionando i valori degli input utente applicandoli come parametri della mia funzione jobFinder.
 
@@ -174,7 +172,7 @@ const searchIt = function() {
   const location = document.querySelector('#location-input').value;   //Valore input location.
   const finalJob = jobFinder(title, location);                        //Applico la funzione.
   const resultsList = document.querySelector('#results-list')         //Seleziono la ul dove inseriro' gli li.  
-  const resultsCounter = document.querySelector('#counter-h3')
+  const resultsCounter = document.querySelector('#counter-h3')        //Seleziono h3 dove inseriro' il mio counter
 
  if (finalJob.result.length > 0) {
   let liHTML = '';                                                  //Dichiare una stringa vuota.
@@ -185,11 +183,11 @@ const searchIt = function() {
   }
   resultsList.innerHTML = liHTML
   resultsCounter.innerText = `Number of Jobs Found: ${finalJob.count}`;
- //console.log('Risultati della ricerca:', finalJob.result);  
- //console.log(`Counter:`, finalJob.count);                //Risultato in Console.
+  console.log('Jobs Found:', finalJob.result);  
+  console.log(`Number of Jobs Found:`, finalJob.count);                //Risultato in Console.
 } else {
   resultsList.innerHTML = "<li>Your search did not yield any results.</li>";
-  resultsCounter.innerText = null                         //Svuoto la variabile per evitare che rimanga in caso di ricerca senza input dopo una ricerca con almeno un input.
+  resultsCounter.innerText = null                         //Svuoto la variabile per evitare che rimanga salvata in caso di ricerca senza input dopo una ricerca con almeno un input.
   console.log("Your search did not yield any results"); }
 }
 
