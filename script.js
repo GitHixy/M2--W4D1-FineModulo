@@ -133,7 +133,7 @@ const jobFinder = function (title, location) {
 
   const foundJobs = []                                  //Array dove inserire i lavori trovati                                                        //let counter = 0  //setto counter = 0 - ogni volta che pushero' un lavoro trovato, fara' counter++. (uso let perche il valore cambia in base alla ricerca).
   if (title.trim() === "" && location.trim() === "") {  //utilizzo trim per definire il fatto che l'input deve contenere qualcosa
-    return foundJobs;                                   //se lascio input vuoti e premo search, mi ritornera' un array vuoto.
+   return {result: foundJobs};                                //se lascio input vuoti e premo search, mi ritornera' "Nessun lavoro trovato."
   }
   //Ciclo dentro l'array jobs per iterare tutti i title e location, pushandoli in foundJobs nei casi in cui job.title AND job.location soddisfino i criteri di ricerca definiti dai parametri.
   //Uso toLowerCase per rendere la ricerca case insensitive.
@@ -173,10 +173,24 @@ const searchIt = function() {
   const title = document.querySelector('#title-input').value;         //Valore input title.
   const location = document.querySelector('#location-input').value;   //Valore input location.
   const finalJob = jobFinder(title, location);                        //Applico la funzione.
+  const resultsList = document.querySelector('#results-list')         //Seleziono la ul dove inseriro' gli li.  
+  const resultsCounter = document.querySelector('#counter-h3')
+
  if (finalJob.result.length > 0) {
- console.log('Risultati della ricerca:', finalJob.result);  
- console.log(`Counter:`, finalJob.count);                //Risultato in Console.
-} else {console.log("Nessun lavoro trovato."); }
+  let liHTML = '';                                                  //Dichiare una stringa vuota.
+
+  for(let i = 0; i < finalJob.result.length; i++) {
+    const singleJob = finalJob.result[i];
+    liHTML += `<li> ${singleJob.title}, ${singleJob.location} </li>`;
+  }
+  resultsList.innerHTML = liHTML
+  resultsCounter.innerText = `Number of Jobs Found: ${finalJob.count}`;
+ //console.log('Risultati della ricerca:', finalJob.result);  
+ //console.log(`Counter:`, finalJob.count);                //Risultato in Console.
+} else {
+  resultsList.innerHTML = "<li>Your search did not yield any results.</li>";
+  resultsCounter.innerText = null                         //Svuoto la variabile per evitare che rimanga in caso di ricerca senza input dopo una ricerca con almeno un input.
+  console.log("Your search did not yield any results"); }
 }
 
 //Aggiungiamo un event listener al bottone che tenga conto dei due input.
