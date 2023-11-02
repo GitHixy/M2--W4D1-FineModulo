@@ -64,11 +64,12 @@ input {
   max-width: 90%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 20px;
 }
 .card-job {
   display: flex;
+  min-width: 100px;
   flex: 0 0 calc(33.33% - 20px);
   gap: 10px;
 }
