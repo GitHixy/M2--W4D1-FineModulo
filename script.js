@@ -179,7 +179,6 @@ const searchIt = function() {
 
   for(let i = 0; i < finalJob.result.length; i++) {
     const singleJob = finalJob.result[i];
-    //liHTML += `<li> ${singleJob.title}, ${singleJob.location} </li>`;
     divHTML += `<div class="card-job">
     <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0tcwXtmwLez8Ld4OOJo_K67PzEc2Q-jLbT1KGdoROv-d53OuZjaXtQE5XY3BuYcdXP9k&usqp=CAU" alt="Job Found"></div>
     <div><h4>${singleJob.title}</h4>
@@ -199,3 +198,9 @@ const searchIt = function() {
 //Aggiungiamo un event listener al bottone che tenga conto dei due input.
 
 searchButton.addEventListener('click', searchIt);
+
+
+//! Funzione "ENTER"
+//! Qualcosa che non renda la pagina vuota all'apertura
+//! BottomBar con dentro finte info
+
