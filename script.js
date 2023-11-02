@@ -201,6 +201,7 @@ searchButton.addEventListener('click', searchIt);
 
 
 //! Funzione "ENTER"
+//! Pulsante search al click svuota gli input
 //! Qualcosa che non renda la pagina vuota all'apertura
 //! BottomBar con dentro finte info
 
