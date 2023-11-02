@@ -171,7 +171,7 @@ const searchIt = function() {
   const title = document.querySelector('#title-input').value;         //Valore input title.
   const location = document.querySelector('#location-input').value;   //Valore input location.
   const finalJob = jobFinder(title, location);                        //Applico la funzione.
-  const resultsList = document.querySelector('#results-list')         //Seleziono la ul dove inseriro' gli li.  
+  const resultsList = document.querySelector('.results-list')         //Seleziono il div dove inseriro' le card dei lavori trovati 
   const resultsCounter = document.querySelector('#counter-h3')        //Seleziono h3 dove inseriro' il mio counter
 
  if (finalJob.result.length > 0) {
@@ -179,15 +179,20 @@ const searchIt = function() {
 
   for(let i = 0; i < finalJob.result.length; i++) {
     const singleJob = finalJob.result[i];
-    liHTML += `<li> ${singleJob.title}, ${singleJob.location} </li>`;
+    //liHTML += `<li> ${singleJob.title}, ${singleJob.location} </li>`;
+    liHTML += `<div class="card-job">
+    <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0tcwXtmwLez8Ld4OOJo_K67PzEc2Q-jLbT1KGdoROv-d53OuZjaXtQE5XY3BuYcdXP9k&usqp=CAU" alt="Job Found"></div>
+    <div><h4>${singleJob.title}</h4>
+    <h5>${singleJob.location}</h5></p></div>
+    </div>`
   }
   resultsList.innerHTML = liHTML
   resultsCounter.innerText = `Number of Jobs Found: ${finalJob.count}`;
   console.log('Jobs Found:', finalJob.result);  
   console.log(`Number of Jobs Found:`, finalJob.count);                //Risultato in Console.
 } else {
-  resultsList.innerHTML = "<li>Your search did not yield any results.</li>";
-  resultsCounter.innerText = null                         //Svuoto la variabile per evitare che rimanga salvata in caso di ricerca senza input dopo una ricerca con almeno un input.
+  resultsCounter.innerHTML = `<h3>Your search did not yield any results.</h3>`;
+  resultsList.innerHTML = null                                         //Svuoto la variabile per evitare che rimanga salvata in caso di ricerca senza input dopo una ricerca con almeno un input.
   console.log("Your search did not yield any results"); }
 }
 

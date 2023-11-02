@@ -1,16 +1,39 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  text-align: center;
-  padding: 20px;
+* {
+  font-family: 'Roboto', sans-serif;
 }
-h1 {
-  background-color: #3498db;
-  color: #fff;
+body {
+  background-color: #f0f0f0;
+}
+.topbar {
+  height: 65px;
+  background-color: #2980b9;
+  color: #ffffff;
+  border-radius: 5px;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo img {
+  width: 145px;
+  object-fit: cover;
+}
+.menu ion-icon {
+  color: white;
+  margin-inline: 20px;
+}
+.menu ion-icon:hover {
+  color: black;
+}
+h2 {
+  text-decoration: underline;
+  color: black;
+  padding: 5px;
   margin-bottom: 20px;
 }
 .searchbox {
+  margin-inline: 40%;
+  width: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +50,6 @@ input {
   background-color: #3498db;
   color: #fff;
   padding: 10px 20px;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
@@ -35,5 +57,21 @@ input {
 }
 #search-button:hover {
   background-color: #20608b;
+  border: black;
 }
-
+.results-list {
+  margin-inline: 10%;
+  max-width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.card-job {
+  display: flex;
+  flex: 0 0 calc(33.33% - 20px);
+  gap: 10px;
+}
+.card-job img{
+  width: 80px;
+}
