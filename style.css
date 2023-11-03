@@ -1,13 +1,16 @@
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 body {
   background-color: #f0f0f0;
+  min-height: 150vh;
 }
 .topbar {
   height: 65px;
+  width: 95%;
   background-color: #2980b9;
   color: #ffffff;
+  margin-inline: 2.5%;
   border-radius: 5px;
   padding: 10px;
   display: flex;
@@ -57,9 +60,9 @@ input {
 }
 #search-button:hover {
   background-color: #20608b;
-  border: black;
 }
 .results-list {
+  margin-top: 20px;
   margin-inline: 10%;
   max-width: 90%;
   display: flex;
@@ -73,6 +76,38 @@ input {
   flex: 0 0 calc(33.33% - 20px);
   gap: 10px;
 }
-.card-job img{
+.card-job img {
   width: 80px;
+}
+.bottombar {
+  background-color: #2980b9;
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  margin-inline: 2.5%;
+  width: 95%;
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+}
+.bottombar-content {
+  display: flex;
+  justify-content: space-around;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.bottombar-item {
+  font-weight: bold;
+}
+.bottombar-item a {
+  text-decoration: none;
+  color: #fff;
+}
+.bottombar-item a:hover {
+  text-decoration: underline;
+}
+#top {
+  position: absolute;
+  top: 0;
 }

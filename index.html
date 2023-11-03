@@ -4,31 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Finder by Michael</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div class="topbar">
+      <div id="top"></div>
       <div class="logo">
         <img src="./assets/JobFinder.png" alt="Job Finder" />
       </div>
       <div><h2>Search Your Job</h2></div>
       <div class="menu">
-        <a href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a>
-        <a href="#"><ion-icon size="large" name="person-circle-outline"></ion-icon></a>
+        <a href="#"
+          ><ion-icon size="large" name="bookmark-outline"></ion-icon
+        ></a>
+        <a href="#"
+          ><ion-icon size="large" name="person-circle-outline"></ion-icon
+        ></a>
       </div>
     </div>
     <div class="searchbox">
       <label>Title:</label>
-      <input type="text" id="title-input" />
+      <input type="text" id="title-input" placeholder="Type Job Position..."/>
       <label>Location:</label>
-      <input type="text" id="location-input" />
+      <input type="text" id="location-input" placeholder="Type Job Location..."/>
       <button id="search-button">Search</button>
       <h3 id="counter-h3"></h3>
     </div>
     <div class="results-list"></div>
+    <div class="bottombar">
+      <div class="bottombar-content">
+        <div class="bottombar-item">
+          <a href="#">Home</a>
+        </div>
+        <div class="bottombar-item">
+          <a href="#">About Us</a>
+        </div>
+        <div class="bottombar-item">
+          <a href="#top">Back to Top</a>
+        </div>
+        <div class="bottombar-item">
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+    </div>
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"

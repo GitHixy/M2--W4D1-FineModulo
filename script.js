@@ -1,47 +1,3 @@
-/*
-PARTE 1: 
-Oggi analizzeremo un problema molto comune: realizzare algoritmi di ricerca.
-Il tuo compito è creare una funzione che cercherà per posizione lavorativa E posizione geografica. 
-Questi due valori verranno passati come parametri
-Ti abbiamo fornito un array chiamato "jobs" in fondo al file, NON modificarlo in alcun modo.
-L'algoritmo che devi realizzare cercherà SIA per posizione lavorativa che per posizione geografica.
-Prendi queste tre inserzioni ad esempio:
-
-      job1:  location: "NY, US",     title: "java dev"
-      job2:  location: "Genoa, IT"   title: "web dev"
-      job3:  location: "US"      title: "dev"
-
-Cercando contemporaneamente come posizione lavorativa "dev" e posizione geografica "US", 
-dovresti ottenere come risultato solamente job1 e job3,
-in quanto job2 non soddisfa la condizione posta sulla posizione geografica.
-
-REQUISITI:
-- il tuo algoritmo deve tornare i risultati nella seguente forma:
-{
-  result: [], <-- inserisci qui le inserzioni che rispecchiano la posizione lavorativa e la posizione geografica richiesta
-  count: 0 <-- inserisci qui il numero totale delle inserzioni trovate
-}
-
-- la tua ricerca deve essere "case insensitive" (non deve essere influenzata da lettere maiuscole o minuscole 
-  nelle parole cercate). Questo e' possibile trasformando tutto in lettere minuscole con .toLowerCase()
-
-
-PARTE 2: 
-Nella pagina HTML, inserisci 2 input di tipo testo (uno per la location e uno per il titolo lavorativo, 
-  ricordati di diversificarli con un id) e un bottone con valore “cerca”
-
-Al click del bottone, il codice deve raccogliere i valori dei due input e darli in pasto alla funzione che 
-hai creato nella parte 1. 
-
-Dopo aver raccolto ed elaborato i dati, e’ il momento di mostrare i risultati sulla pagina: 
-    Puoi scegliere tu se utilizzare un semplice ul / li oppure una tabella 
-    Vai passo per passo e usa molti console.log per capire eventualmente dove sbagli
-    SUGGERIMENTO: ti servira’ un ciclo for!
-
-*/
-
-// NON MODIFICARE QUESTO ARRAY!
-
 const jobs = [
   { title: "Marketing Intern", location: "US, NY, New York" },
   {
@@ -127,81 +83,77 @@ const jobs = [
     title: "English Teacher Abroad",
     location: "US, NY, Saint Bonaventure",
   },
-]
+];
 
 const jobFinder = function (title, location) {
-
-  const foundJobs = []                                  //Array dove inserire i lavori trovati                                                        //let counter = 0  //setto counter = 0 - ogni volta che pushero' un lavoro trovato, fara' counter++. (uso let perche il valore cambia in base alla ricerca).
-  if (title.trim() === "" && location.trim() === "") {  //utilizzo trim per definire il fatto che l'input deve contenere qualcosa
-   return {result: foundJobs};                                //se lascio input vuoti e premo search, mi ritornera' "Nessun lavoro trovato."
+  const foundJobs = []; //Array dove inserire i lavori trovati                                                        //let counter = 0  //setto counter = 0 - ogni volta che pushero' un lavoro trovato, fara' counter++. (uso let perche il valore cambia in base alla ricerca).
+  if (title.trim() === "" && location.trim() === "") {
+    //utilizzo trim eliminare spazi bianchi quindi non dare come risultato tutto l'array jobs, ritornando foundJobs risultera' vuoto non avendo ancora pushato nulla.
+    return { result: foundJobs }; 
   }
   //Ciclo dentro l'array jobs per iterare tutti i title e location, pushandoli in foundJobs nei casi in cui job.title AND job.location soddisfino i criteri di ricerca definiti dai parametri.
   //Uso toLowerCase per rendere la ricerca case insensitive.
 
-  for (let i = 0; i < jobs.length; i++) { 
-  const job = jobs[i];
-  if (job.title.toLowerCase().includes(title.toLowerCase()) && job.location.toLowerCase().includes(location.toLowerCase())) { 
-
-  foundJobs.push(job);
+  for (let i = 0; i < jobs.length; i++) {
+    const job = jobs[i];
+    if (
+      job.title.toLowerCase().includes(title.toLowerCase()) &&
+      job.location.toLowerCase().includes(location.toLowerCase())
+    ) {
+      foundJobs.push(job);
+    }
   }
-}
-return { result: foundJobs, count: foundJobs.length };
+  return { result: foundJobs, count: foundJobs.length };
 };
 
-//Provo la funzione:
-
-//const jobToSearch = "dev";                                    //Inserisco parametro di ricerca per lavoro.
-//const locationToSearch = "US";                                //Inserisco parametro di ricerca zona geografica.
-//const finalJob = jobFinder(jobToSearch, locationToSearch);    //a finalJob applico la funzione jobFinder.
-
-
-//if (finalJob.length > 0) {
-//  console.log("Lavori trovati:");
-//  console.log(finalJob);
-//  console.log(`Count: ${finalJob.length}`);                   //Soluzione semplice che sostituisce il counter.
-//  } else {
-//  console.log("Nessun lavoro trovato.");
-//}
-
-const searchButton = document.querySelector('#search-button');  //Impostato l'HTML andiamo a selezionare il nostro pulsante search.
+const searchButton = document.querySelector("#search-button"); //Seleziono il bottone Search.
+const titleIn = document.querySelector("#title-input"); //Seleziono title che mi servira' nella funzione ma anche per avviare la ricerca con Invio.
+const locationIn = document.querySelector("#location-input"); //Stesso discorso per location.
 
 //creo funzione selezionando i valori degli input utente applicandoli come parametri della mia funzione jobFinder.
 
-const searchIt = function() {
-  const title = document.querySelector('#title-input').value;         //Valore input title.
-  const location = document.querySelector('#location-input').value;   //Valore input location.
-  const finalJob = jobFinder(title, location);                        //Applico la funzione.
-  const resultsList = document.querySelector('.results-list')         //Seleziono il div dove inseriro' le card dei lavori trovati 
-  const resultsCounter = document.querySelector('#counter-h3')        //Seleziono h3 dove inseriro' il mio counter
+const searchIt = function () {
+  const title = titleIn.value;
+  const location = locationIn.value;
+  const finalJob = jobFinder(title, location);
+  const resultsList = document.querySelector(".results-list"); //Seleziono il div dove inseriro' le card dei lavori trovati.
+  const resultsCounter = document.querySelector("#counter-h3"); //Seleziono h3 dove inseriro' il counter.
 
- if (finalJob.result.length > 0) {
-  let divHTML = '';                                                  //Dichiare una stringa vuota.
+  if (finalJob.result.length > 0) {
+    let divHTML = ""; //Dichiaro una stringa vuota.
 
-  for(let i = 0; i < finalJob.result.length; i++) {
-    const singleJob = finalJob.result[i];
-    divHTML += `<div class="card-job">
+    for (let i = 0; i < finalJob.result.length; i++) {
+      const singleJob = finalJob.result[i];
+      divHTML += `<div class="card-job">
     <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0tcwXtmwLez8Ld4OOJo_K67PzEc2Q-jLbT1KGdoROv-d53OuZjaXtQE5XY3BuYcdXP9k&usqp=CAU" alt="Job Found"></div>
     <div><h4>${singleJob.title}</h4>
     <h5>${singleJob.location}</h5></p></div>
-    </div>`
+    </div>`;
+    }
+    resultsList.innerHTML = divHTML;
+    resultsCounter.innerText = `Number of Jobs Found: ${finalJob.count}`;
+    console.log("Jobs Found:", finalJob.result);
+    console.log("Number of Jobs Found:", finalJob.count); //Risultato in Console.
+  } else {
+    resultsCounter.innerHTML = `<h3>Your search did not yield any results.</h3>`;
+    resultsList.innerHTML = null; //Svuoto la variabile per evitare che rimanga salvata in caso di ricerca senza input dopo una ricerca con almeno un input.
+    console.log("Your search did not yield any results");
   }
-  resultsList.innerHTML = divHTML
-  resultsCounter.innerText = `Number of Jobs Found: ${finalJob.count}`;
-  console.log('Jobs Found:', finalJob.result);  
-  console.log(`Number of Jobs Found:`, finalJob.count);                //Risultato in Console.
-} else {
-  resultsCounter.innerHTML = `<h3>Your search did not yield any results.</h3>`;
-  resultsList.innerHTML = null                                         //Svuoto la variabile per evitare che rimanga salvata in caso di ricerca senza input dopo una ricerca con almeno un input.
-  console.log("Your search did not yield any results"); }
+};
+
+//Creo funzione per cercare premendo Invio.
+
+const searchOnEnter = function (ev) {
+  if (ev.key === "Enter") {
+    ev.preventDefault(); //Utilizzato per evitare il modulo predefinito collegato alla pressione di Invio.
+    searchIt();
+  }
 }
 
-//Aggiungiamo un event listener al bottone che tenga conto dei due input.
+//Applico searchOnEnter a keydown sui due input title e location.
 
-searchButton.addEventListener('click', searchIt);
+titleIn.addEventListener("keydown", searchOnEnter);
+locationIn.addEventListener("keydown", searchOnEnter);
 
-
-//! Funzione "ENTER"
-//! Pulsante search al click svuota gli input
-//! Qualcosa che non renda la pagina vuota all'apertura
-//! BottomBar con dentro finte info
-
+//Aggiungiamo un event listener per far si che quando clicchiamo su Search, parta la funzione searchIt.
+searchButton.addEventListener("click", searchIt);
