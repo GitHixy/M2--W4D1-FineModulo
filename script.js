@@ -86,11 +86,12 @@ const jobs = [
 ];
 
 const jobFinder = function (title, location) {
-  const foundJobs = []; //Array dove inserire i lavori trovati                                                        //let counter = 0  //setto counter = 0 - ogni volta che pushero' un lavoro trovato, fara' counter++. (uso let perche il valore cambia in base alla ricerca).
+  const foundJobs = []; //Array dove inserire i lavori trovati
   if (title.trim() === "" && location.trim() === "") {
-    //utilizzo trim eliminare spazi bianchi quindi non dare come risultato tutto l'array jobs, ritornando foundJobs risultera' vuoto non avendo ancora pushato nulla.
-    return { result: foundJobs }; 
+    //utilizzo trim per eliminare spazi bianchi quindi non dare come risultato tutto l'array jobs, ritornando foundJobs risultera' vuoto non avendo ancora pushato nulla.
+    return { result: foundJobs };
   }
+
   //Ciclo dentro l'array jobs per iterare tutti i title e location, pushandoli in foundJobs nei casi in cui job.title AND job.location soddisfino i criteri di ricerca definiti dai parametri.
   //Uso toLowerCase per rendere la ricerca case insensitive.
 
@@ -148,7 +149,7 @@ const searchOnEnter = function (ev) {
     ev.preventDefault(); //Utilizzato per evitare il modulo predefinito collegato alla pressione di Invio.
     searchIt();
   }
-}
+};
 
 //Applico searchOnEnter a keydown sui due input title e location.
 
